@@ -1,0 +1,48 @@
+{{#if hasResult}}
+<div class="row mx-3">
+    <div class="col-sm">
+        <h3>Search result</h3>
+    </div>
+</div>
+
+<div class="row mx-3">
+    <div class="col-sm">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">APP_ID</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Installs</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each recs}}
+                <tr>
+                    <td scope="row">{{this.app_id}}</td>
+                    <td scope="row">{{this.name}}</td>
+                    <td scope="row">{{this.category}}</td>
+                    <td scope="row">{{this.rating}}</td>
+                    <td scope="row">{{this.installs}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item {{#if isFirstPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currentOffset={{previousPageOffset}}">Previous</a></li>
+                <li class="page-item {{#if isLastPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currentOffset={{nextPageOffset}}">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{{else}}
+
+<div class="row mx-3">
+    <div class="col-sm">
+        <h3>You searched for has no result</h3>
+    </div>
+</div>
+{{/if}}

@@ -61,7 +61,8 @@ app.get('/',(req, res) => {
 app.get('/search', 
     async (req, res) => {
         const q = req.query['q'];
-        const currentOffset = parseInt(req.query['currentOffset']);
+        const currOffset = parseInt(req.query['currOffset']) || 0;
+        const limit = 10;
 
         // acquire a connection from the connection pool
         const conn = await pool.getConnection();
@@ -70,7 +71,7 @@ app.get('/search',
             // perform the query
             // const result = await conn.query(SQL_FIND_BY_NAME, [`%${q}`, 10]);
             // const recs = result[0];
-            const [recs, __ ] = await conn.query(SQL_FIND_BY_NAME, [`%${q}%`, currentOffset]);
+            const [recs, __ ] = await conn.query(SQL_FIND_BY_NAME, [`%${q}%`, currOffset]);
 
             console.info('recs = ', recs);
 
@@ -80,10 +81,10 @@ app.get('/search',
                 queryString: q,
                 recs: recs,
                 hasResult: recs.length > 0,
-                previousPageOffset: currentOffset - 10,
-                nextPageOffset: currentOffset + 10,
-                isFirstPage: currentOffset < 10,
-                isLastPage: recs.length < 10
+                prevOffset: currOffset - limit,
+                nextOffset: currOffset + limit,
+                isFirstPage: currOffset < limit,
+                isLastPage: recs.length < limit
             });
         } catch (e) {
             console.error('Error performing the query ', e);

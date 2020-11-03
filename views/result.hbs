@@ -30,10 +30,11 @@
             </tbody>
         </table>
 
+        <!-- Navigation Buttons -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item {{#if isFirstPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currentOffset={{previousPageOffset}}">Previous</a></li>
-                <li class="page-item {{#if isLastPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currentOffset={{nextPageOffset}}">Next</a></li>
+                <li class="page-item {{#if isFirstPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currOffset={{prevOffset}}">Previous</a></li>
+                <li class="page-item {{#if isLastPage}}disabled{{else}}{{/if}}"><a class="page-link" href="/search?q={{queryString}}&currOffset={{nextOffset}}">Next</a></li>
             </ul>
         </nav>
     </div>
